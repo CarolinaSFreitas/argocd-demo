@@ -1,6 +1,0 @@
-apiVersion: v2
-name: meu-app
-description: Chart mínimo do meu-app para Argo CD demo
-type: application
-version: 0.1.0      # versão do chart
-appVersion: "1.0.0" # versão da sua aplicação (informativo)
