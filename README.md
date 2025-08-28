@@ -129,11 +129,10 @@ Self Heal: caso alguém altere manualmente um recurso diretamente no cluster, o 
 - Antes: o Deployment estava com replicas: 1.
 - Alterei no deployment.yaml para replicas: 5 e fiz commit + push.
 - Sem Auto-Sync habilitado: a Application ficou com status OutOfSync até que eu habilitasse o auto-sync.
-    <img src="imgs/img1.jpeg" alt="ArgoCD OutOfSync" width="600"/>
+<img src="imgs/img1.jpeg" alt="ArgoCD OutOfSync" width="600"/>
 
 - Com Auto-Sync, Prune e Self Heal habilitados, o Argo CD detectou a diferença e atualizou automaticamente o cluster para 5 réplicas, sem precisar de ação manual.
-    <img src="imgs/img2.jpeg" alt="ArgoCD Auto-Sync" width="600"/>
-
+<img src="imgs/img2.jpeg" alt="ArgoCD Auto-Sync" width="600"/>
 
 
 ### Sync manual x Auto-Sync
