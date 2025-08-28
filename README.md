@@ -1,4 +1,4 @@
-# ArgoCD — Estudo Prático
+# ArgoCD | Estudo Prático
 
 Este repositório é apenas para **prática de estudos** seguindo como base o projeto [Descomplicando ArgoCD](https://github.com/badtuxx/DescomplicandoArgoCD).
 
