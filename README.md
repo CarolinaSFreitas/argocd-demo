@@ -116,25 +116,34 @@ Faça uma alteração no diretório `manifests/` (ex.: mudar réplicas no `deplo
 
 ## 7) Teste de Sync Automático
 
-No painel do ArgoCD, ao acessar a Application, é possível configurar a Sync Policy. As opções são:
+No painel do Argo CD, ao acessar a Application, é possível configurar a Sync Policy. As opções são:
 
-1. Enable Auto-Sync: ativa a sincronização automática sempre que houver mudanças no repositório Git.
+Enable Auto-Sync: ativa a sincronização automática sempre que houver mudanças no repositório Git.
 
-2. Prune Resources: remove do cluster os recursos que foram apagados no Git, garantindo que apenas o que está versionado exista no cluster.
+Prune Resources: remove do cluster os recursos que foram apagados no Git, garantindo que apenas o que está versionado exista no cluster.
 
-3. Self Heal: caso alguém altere manualmente um recurso diretamente no cluster, o Argo CD corrige e volta para o estado definido no Git.
+Self Heal: caso alguém altere manualmente um recurso diretamente no cluster, o Argo CD corrige e volta para o estado definido no Git.
 
-Exemplo do teste
+### Exemplo do teste
 
-Antes: o Deployment estava com replicas: 1.
+- Antes: o Deployment estava com replicas: 1.
+- Alterei no deployment.yaml para replicas: 5 e fiz commit + push.
+- Sem Auto-Sync habilitado: a Application ficou com status OutOfSync até que eu habilitasse o auto-sync.
+    <img src="imgs/img1.jpeg" alt="ArgoCD OutOfSync" width="600"/>
 
-Alterei no deployment.yaml para replicas: 5 e fiz commit + push.
-
-Com Auto-Sync, Prune e Self Heal habilitados, o Argo CD detectou a diferença e atualizou automaticamente o cluster para 5 réplicas, sem precisar de ação manual.
-
-Nos prints abaixo dá pra ver a tela da Application mostrando o estado OutOfSync e depois a sincronização automática ajustando o ReplicaSet para 5, mantendo o cluster fiel ao que está descrito no Git.
+- Com Auto-Sync, Prune e Self Heal habilitados, o Argo CD detectou a diferença e atualizou automaticamente o cluster para 5 réplicas, sem precisar de ação manual.
+    <img src="imgs/img2.jpeg" alt="ArgoCD Auto-Sync" width="600"/>
 
 
+
+### Sync manual x Auto-Sync
+
+Caso o Auto-Sync não esteja habilitado, você pode forçar a sincronização manualmente com:
+```
+argocd app sync hello-nginx
+```
+
+Com o Auto-Sync ativado, esse comando não é necessário, o Argo CD aplica as mudanças automaticamente assim que detecta alterações no repositório.
 
 ---
 
@@ -154,5 +163,4 @@ Nos prints abaixo dá pra ver a tela da Application mostrando o estado OutOfSync
 
 ## Observações
 
-* Este repo é apenas para **estudos**, inspirado no projeto *Descomplicando ArgoCD*.
-* A *syncPolicy* está configurada em modo **automated** (prune + selfHeal) com `CreateNamespace=true` para facilitar.
+* Este repo é apenas para **estudos**, inspirado no repositório *Descomplicando ArgoCD*.
